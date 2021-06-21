@@ -2,16 +2,22 @@ package subtask3
 
 import kotlin.reflect.KClass
 
-
-fun main() {
-    val blocks = Blocks()
-    val blockA = arrayOf(1, "3", 4, "3")
-    blocks.getData(blockA, String::class)
-}
-
 class Blocks {
 
     fun getData(blockA: Array<*>, blockB: KClass<*>): Any {
-        TODO("Not realization")
+
+        when (blockB.qualifiedName) {
+            is String -> {
+                val stringBuilder: StringBuilder = java.lang.StringBuilder()
+                blockA.forEach {
+                    if (it is String) {
+                        println(it)
+                        stringBuilder.append(it)
+                    }
+                }
+                return stringBuilder.toString()
+            }
+        }
+        return ""
     }
 }
